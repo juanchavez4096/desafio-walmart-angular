@@ -1,0 +1,20 @@
+
+<div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="16px grid">
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" fxFlex.md="25%" fxFlex.lg="25%" *ngFor="let product of products; let i = index;">
+        <mat-card class="product-list-card" [ngClass]="{
+          'mat-elevation-z3': activeProduct === i
+        }" (mouseover)="setElevation(i)" (mouseout)="setElevation(-1)">
+            <img mat-card-image [src]="'https://'+product.image" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+              <p>
+                <span class="brand">{{product.brand}}</span> 
+                <span class="description">{{product.description}}</span>
+              </p>
+            </mat-card-content>
+            <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+              <button class="wallmart-add-card-button">Agregar</button>
+            </mat-card-actions>
+          </mat-card>
+    </div>
+</div>
+    

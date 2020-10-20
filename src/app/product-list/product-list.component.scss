@@ -1,0 +1,29 @@
+.product-list-card {
+    max-width: 18rem;
+    border-radius: 20px
+  }
+.pointer {
+  cursor: pointer;
+}
+
+.brand {
+  font-weight: 700;
+}
+
+.description{
+  margin-left: 4px;
+}
+
+.wallmart-add-card-button{
+  width: 145px;
+  height: 32px;
+  border-radius: 23px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: .4px;
+  color: #0071ce;
+  border-color: #fff;
+}
