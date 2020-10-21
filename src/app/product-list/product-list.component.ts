@@ -11,6 +11,9 @@ export class ProductListComponent implements OnInit {
   products = [];
   activeProduct = -1;
   currentSearch: string;
+  pages: number = 4;
+  currentPage: number = 1;
+  
   constructor() { }
 
   ngOnInit(): void {
@@ -44,7 +47,19 @@ export class ProductListComponent implements OnInit {
     }];
   }
 
-  setElevation(i: number){
+  setElevation(i: number): void{
     this.activeProduct = i;
+  }
+
+  changePage(newPage: number){
+    if (newPage < 1) {
+      newPage = 1;
+    }
+    if (newPage > this.pages) {
+      newPage = this.pages;
+    }
+    if (this.currentPage !== newPage) {
+      this.currentPage = newPage; 
+    }
   }
 }
