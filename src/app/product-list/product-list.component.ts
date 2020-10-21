@@ -9,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class ProductListComponent implements OnInit {
 
   products = [];
-  currentProduct
   activeProduct = -1;
+  currentSearch: string;
   constructor() { }
 
   ngOnInit(): void {

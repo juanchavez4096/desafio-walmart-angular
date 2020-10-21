@@ -1,4 +1,14 @@
 
+<div fxLayout="row" fxLayoutAlign="space-between" class="featured" >
+  <div>
+    <span *ngIf="currentSearch">Resultados para <span class="bold">{{currentSearch}}</span> : </span>
+  </div>
+  
+  <button mat-raised-button [disableRipple]="true" class="button-navbar">Ordenar por: destacados
+    <img style="width: 5px;" alt="cart" src="https://www.lider.cl/catalogo/images/arrow_mobile.svg">
+  </button>
+</div>
+
 <div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="16px grid">
     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" fxFlex.md="25%" fxFlex.lg="25%" *ngFor="let product of products; let i = index;">
         <mat-card class="product-list-card" [ngClass]="{
@@ -7,7 +17,7 @@
             <img mat-card-image [src]="'https://'+product.image" alt="Photo of a Shiba Inu">
             <mat-card-content>
               <p>
-                <span class="brand">{{product.brand}}</span> 
+                <span class="bold">{{product.brand}}</span> 
                 <span class="description">{{product.description}}</span>
               </p>
             </mat-card-content>

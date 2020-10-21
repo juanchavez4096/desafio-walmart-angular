@@ -24,11 +24,17 @@ describe('ProductListComponent', () => {
   });
 
   it('should setElevation', () => {
-    component.products = [{id: 1, name: "test"}]
+    component.products = [{
+      "id": 4,
+      "brand": "test",
+      "description": "test",
+      "image": "www.lider.cl/catalogo/images/computerIcon.svg",
+      "price": 890348
+    }]
     fixture.detectChanges();
-    component.setElevation(1);
+    component.setElevation(0);
     const compiled = fixture.nativeElement;
     
-    expect(compiled.querySelector('.mat-elevation-z4 mat-card-content p').textContent).toContain('test');
+    expect(compiled.querySelector('.mat-elevation-z3 mat-card-content p').textContent).toContain('test');
   });
 });
