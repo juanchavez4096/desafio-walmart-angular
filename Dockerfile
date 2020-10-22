@@ -9,4 +9,5 @@ RUN npm run build-prod
  
 # Stage 2
 FROM nginx:1.18.0-alpine
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build-step /app/dist/desafio-walmart /usr/share/nginx/html
