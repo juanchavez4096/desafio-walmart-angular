@@ -1,0 +1,45 @@
+<div style="background-color: whitesmoke; height: 100%;">
+  <mat-toolbar class="client-service">
+    <span>Servicio al cliente de Lider.cl: WhatsApp +56957211492 | Horario: de lunes a viernes de 8:00 a 22:00 y sábado,
+      domingo y festivos de 9:00 a 22:00 </span>
+  </mat-toolbar>
+  <mat-toolbar class="navbar">
+
+    <img style="color: #fff;" class="logo" src="https://www.lider.cl/images/logo.svg" alt="Lider.cl">
+    <button mat-flat-button [disableRipple]="true" class="button-navbar button-catalogo">
+      <img class="svg-white" alt="menu" src="/assets/menu.svg">
+      Categorías
+    </button>
+
+
+
+    <span class="spacer"></span>
+    <div class="search-bar" fxLayout="row" fxLayoutAlign="center" >
+        <mat-icon style="color: black">
+            search
+        </mat-icon>
+        <input type="search" placeholder="¿Qué estás buscando?" maxlength="512" class="input-search" value="" autofocus="">
+    </div>
+
+    
+
+    <span class="spacer"></span>
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="8px">
+      <a fxLayout="column" mat-flat-button [disableRipple]="true" class="button-navbar button-carrito">
+        <img alt="cart" src="http://www.lider.cl/catalogo/images/lider-cart.svg">
+        <mat-icon aria-hidden="false" class="cart-quantity">
+          <div class="quantity-number">1</div>
+        </mat-icon>
+
+
+      </a>
+      <a mat-flat-button [disableRipple]="true" class="button-navbar button-supermercado">
+        <img src="https://www.lider.cl/catalogo/images/super_cart.svg" alt="supermercado"> Supermercado
+
+      </a>
+    </div>
+
+
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</div>

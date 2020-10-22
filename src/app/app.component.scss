@@ -1,0 +1,90 @@
+.navbar {
+  background-color: rgb(0, 113, 206);
+  height: 58px;
+}
+
+.client-service {
+  background-color: rgb(4, 30, 66);
+  height: 30px;
+  font-size: 12px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  color: #fff;
+}
+
+.logo {
+  max-width: 107px;
+}
+
+.button-navbar {
+  color: #fff;
+  height: 40px;
+
+}
+
+.button-catalogo {
+  background-color: #041e42;
+  margin-left: 20px;
+  display: inline-block;
+  width: 140px;
+  min-width: 140px;
+}
+
+.button-supermercado {
+  background-color: rgb(0, 88, 161);
+  transition: 0.3s;
+}
+
+.button-supermercado:hover {
+  background-color: #46b550;
+}
+
+.button-carrito {
+  background-color: #00548c;
+}
+
+.cart-quantity {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  background-color: #ffc220;
+  margin-left: 10px;
+}
+
+.quantity-number {
+  padding-top: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  color: #06568f;
+}
+
+.svg-white {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(120deg) brightness(102%) contrast(103%)
+}
+
+.search-bar {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: .3rem .6rem;
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #c4c8d8;
+  border-radius: 40px;
+  margin: 0px 3%;
+  height: 38px;
+  box-sizing: border-box;
+  display:inline-block;
+}
+
+.input-search {
+  width: 100%;
+  border: none;
+}

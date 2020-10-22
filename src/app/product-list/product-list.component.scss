@@ -1,0 +1,84 @@
+.product-list-card {
+    max-width: 18rem;
+    border-radius: 20px
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.description {
+    margin-left: 4px;
+}
+
+.wallmart-add-card-button {
+    width: 145px;
+    height: 32px;
+    border-radius: 23px;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: .4px;
+    color: #0071ce;
+    border-color: #fff;
+}
+
+.featured {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.paginator {
+    border-radius: 20px;
+    background-color: #fff;
+    margin-top: 40px;
+    vertical-align: middle;
+}
+
+.arrow {
+    color: #0071ce;
+    cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.disabled {
+    color: #ddd;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.selected-page {
+    color: #fff;
+    background-color: #0071ce;
+    border-radius: 50%;
+}
+
+.page {
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    text-align: center;
+}
+
+.non-selected-page:hover {
+    background-color: #fff;
+    border-style: solid;
+    border-color: #2b86d3;
+    border-width: 1px;
+    width: 28px;
+    height: 28px;
+    color: #2b86d3;
+    border-radius: 50%;
+}
