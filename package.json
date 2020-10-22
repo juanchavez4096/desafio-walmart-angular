@@ -8,6 +8,7 @@
         "build-prod": "ng build --prod",
         "test": "ng test",
         "test-coverage": "ng test --no-watch --code-coverage",
+        "test-ci": "ng test --karma-config=karma-ci.conf.js --no-progress",
         "lint": "ng lint",
         "e2e": "ng e2e"
     },
