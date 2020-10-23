@@ -57,4 +57,17 @@ export class ProductListComponent implements OnInit {
       this.searchProducts(newPage - 1, this._currentSearch);
     }
   }
+
+  formatMoney(value) {
+
+    
+    let num = value;
+    if (!isNaN(num)) {
+        num = num.toString().split('').reverse().join('').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+        num = num.split('').reverse().join('').replace(/^[\.]/, '');
+        value = num;
+    }
+    return `${value}`;
+
+}
 }
