@@ -50,11 +50,7 @@
     padding-right: 10px;
 }
 
-.disabled {
-    color: #ddd;
-    cursor: not-allowed;
-    pointer-events: none;
-}
+
 
 .selected-page {
     color: #fff;
@@ -82,3 +78,28 @@
     color: #2b86d3;
     border-radius: 50%;
 }
+
+.price{
+    font-weight: 500;
+    font-size: 20px;
+    margin-left: 2px;
+}
+
+.discountChip{
+    background-color: red;
+    color: #fff;
+    padding-left: 8px;
+    padding-right: 8px;
+    min-height: 25px;
+}
+
+.originalPrice{
+    text-decoration-line: line-through;
+    margin-top: 10px;
+}
+
+.disabled {
+    color: #ddd;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
