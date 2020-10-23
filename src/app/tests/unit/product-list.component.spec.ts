@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { defer, Observable } from 'rxjs';
+import { ProductDto } from 'src/app/model/ProductDto';
 import { CoreModule } from '../../core/core.module';
 import { ProductService } from '../../core/service';
 
@@ -12,6 +13,16 @@ describe('ProductListComponent', () => {
   let fixture: ComponentFixture<ProductListComponent>;
 
   let componentService: ProductService;
+
+  let productMock : ProductDto = {
+    id : 1,
+    brand: "test",
+    description: "test",
+    discount: 0,
+    image: "http://test/image.jpg",
+    price: 5000,
+    priceDiscount: 0
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -81,34 +92,51 @@ describe('ProductListComponent', () => {
     expect(component.searchProducts).toHaveBeenCalledWith(3 - 1, component._currentSearch)
   });
 
-  /*it('should searchProduct', () => {
-    componentService = TestBed.createComponent(ProductService);
-
-    fixtureService = TestBed.createComponent(ProductService);
-    componentService = fixtureService.componentInstance;
-    fixtureService.detectChanges();
-    spyOn('ProductService', 'getProducts').and.returnValue(defer(() => Promise.resolve({content: [], totalPages: 5})));
-
-
-
-   
-    component.searchProducts(0, '');
-    expect(component.products).toEqual([]);
-
-    spyOn(componentService, 'getProducts').and.returnValue(defer(() => Promise.resolve({content: [], totalPages: 0})));
+  it('should searchProduct', () => {
+    component.products = [];
+    componentService = TestBed.inject(ProductService);
+    spyOn(componentService, 'getProducts').and.returnValue(defer(() => Promise.resolve({content: [productMock], totalPages: 5})));
+    spyOn(component, 'searchProducts').and.callThrough();;
 
     component.searchProducts(0, '');
-    expect(component.pages).toEqual(1);
+    
+    expect(component.searchProducts).toHaveBeenCalled()
+  });
 
-    spyOn(componentService, 'getProducts').and.returnValue(defer(() => Promise.reject({content: [], totalPages: 0})));
+  it('should searchProduct with no pages', () => {
+    component.products = [];
+    componentService = TestBed.inject(ProductService);
+    spyOn(componentService, 'getProducts').and.returnValue(defer(() => Promise.resolve({content: [productMock], totalPages: 0})));
+    spyOn(component, 'searchProducts').and.callThrough();;
+
     component.searchProducts(0, '');
-  });*/
+    expect(component.searchProducts).toHaveBeenCalled()
+  });
+
+  it('should not searchProduct: Error', () => {
+    component.products = [];
+    componentService = TestBed.inject(ProductService);
+    spyOn(componentService, 'getProducts').and.returnValue(defer(() => Promise.reject({content: [productMock], totalPages: 5})));
+    spyOn(component, 'searchProducts').and.callThrough();
+
+    component.searchProducts(0, '');
+    expect(component.searchProducts).toHaveBeenCalled()
+  });
 
   it('should changeCurrentSearch', () => {
     spyOn(component, 'searchProducts').and.callFake(() => null);
     component.currentSearch = 'test';
     expect(component._currentSearch).toBe('test');
   });
+
+  it('should extractData', () => {
+    componentService = TestBed.inject(ProductService);
+    
+    expect(componentService.extractData({})).toEqual({});
+  });
+
+  
+
 
 
 });
