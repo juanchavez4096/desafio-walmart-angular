@@ -12,7 +12,7 @@ export class ProductService {
     return this.http.get(`${environment.BASE_URL}/products/findPage?search=${search}&page=${page}`).pipe(map(this.extractData));
   }
 
-  private extractData(res) {
+  extractData(res) {
     const body = res;
     return body;
   }
