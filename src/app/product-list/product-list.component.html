@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="space-between" class="featured">
     <div>
-        <span *ngIf="currentSearch">Resultados para <span class="bold">{{currentSearch}}</span> : </span>
+        <span *ngIf="_currentSearch">Resultados para <span class="bold">{{_currentSearch}}</span> : </span>
     </div>
 
     <button mat-raised-button [disableRipple]="true" class="button-navbar">Ordenar por: destacados
@@ -9,8 +9,8 @@
 </div>
 
 
-<div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="16px grid">
-    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" fxFlex.md="25%" fxFlex.lg="25%" *ngFor="let product of products; let i = index;">
+<div fxLayout="row wrap" fxLayoutAlign="flex-start" fxLayoutGap="16px grid">
+    <div fxFlex="25%" [ngStyle.xs]="{'height': '100%'}"  fxFlex.xs="100%" fxFlex.sm="33%" fxFlex.md="25%" fxFlex.lg="25%" *ngFor="let product of products; let i = index;">
         <mat-card class="product-list-card" [ngClass]="{
             'mat-elevation-z3': activeProduct === i
           }" (mouseover)="setElevation(i)" (mouseout)="setElevation(-1)">
@@ -20,6 +20,16 @@
                     <span class="bold">{{product.brand}}</span>
                     <span class="description">{{product.description}}</span>
                 </p>
+                <mat-chip-list aria-label="Color selection" style="margin-bottom: 10px;">
+                  <span class="price">${{product.priceDiscount === 0 ? product.price : product.priceDiscount | number}}</span>
+                  <mat-chip *ngIf="product.discount !== 0" class="discountChip">
+                    {{product.discount}}%
+                  </mat-chip>
+                </mat-chip-list>
+
+                <div *ngIf="product.discount !== 0" class="originalPrice">${{product.price | number}}</div>
+                
+                
             </mat-card-content>
             <mat-card-actions fxLayout="row" fxLayoutAlign="center">
                 <button class="wallmart-add-card-button">Agregar</button>
@@ -28,8 +38,8 @@
     </div>
 </div>
 
-<mat-toolbar class="paginator" fxLayout="row" fxLayoutAlign="center">
-    <div fxLayoutGap="8px">
+<mat-toolbar class="paginator" fxLayout="column" fxLayoutAlign="center">
+    <div fxLayoutGap="8px" fxLayout="row" fxLayoutAlign="center">
         <span class="arrow" [ngClass]="{
       'disabled': currentPage === 1
     }" (click)="changePage(currentPage - 1)"><</span>

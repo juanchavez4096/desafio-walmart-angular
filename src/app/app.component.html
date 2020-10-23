@@ -1,12 +1,12 @@
-<div style="background-color: whitesmoke; height: 100%;">
-  <mat-toolbar class="client-service">
+<div >
+  <mat-toolbar class="client-service" [ngStyle.sm]="{'display': 'none'}" [ngStyle.md]="{'display': 'none'}" [ngStyle.xs]="{'display': 'none'}">
     <span>Servicio al cliente de Lider.cl: WhatsApp +56957211492 | Horario: de lunes a viernes de 8:00 a 22:00 y sábado,
       domingo y festivos de 9:00 a 22:00 </span>
   </mat-toolbar>
   <mat-toolbar class="navbar">
 
     <img style="color: #fff;" class="logo" src="https://www.lider.cl/images/logo.svg" alt="Lider.cl">
-    <button mat-flat-button [disableRipple]="true" class="button-navbar button-catalogo">
+    <button mat-flat-button [disableRipple]="true" class="button-navbar button-catalogo" [ngStyle.xs]="{'display': 'none'}">
       <img class="svg-white" alt="menu" src="/assets/menu.svg">
       Categorías
     </button>
@@ -14,14 +14,20 @@
 
 
     <span class="spacer"></span>
-    <div class="search-bar" fxLayout="row" fxLayoutAlign="center" >
-        <mat-icon style="color: black">
-            search
-        </mat-icon>
-        <input type="search" placeholder="¿Qué estás buscando?" maxlength="512" class="input-search" value="" autofocus="">
+    <div class="search-bar" [ngClass]="{
+      'disabled-search': searching
+    }" fxLayout="row" fxLayoutAlign="center">
+      <mat-icon style="color: black">
+        search
+      </mat-icon>
+
+
+      <input [disabled]="searching" [(ngModel)]="search" type="search" (keydown.enter)="goSearch()" placeholder="¿Qué estás buscando?" maxlength="512" class="input-search"
+        value="" autofocus="">
+
     </div>
 
-    
+
 
     <span class="spacer"></span>
     <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="8px">
@@ -33,7 +39,7 @@
 
 
       </a>
-      <a mat-flat-button [disableRipple]="true" class="button-navbar button-supermercado">
+      <a mat-flat-button [disableRipple]="true" class="button-navbar button-supermercado" [ngStyle.md]="{'display': 'none'}" [ngStyle.sm]="{'display': 'none'}" [ngStyle.md]="{'display': 'none'}" [ngStyle.xs]="{'display': 'none'}">
         <img src="https://www.lider.cl/catalogo/images/super_cart.svg" alt="supermercado"> Supermercado
 
       </a>
@@ -41,5 +47,5 @@
 
 
   </mat-toolbar>
-  <router-outlet></router-outlet>
+  <app-product-list [currentSearch]="currentSearch" (searchingEventEmiter)="changeState($event)"></app-product-list>
 </div>

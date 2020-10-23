@@ -88,3 +88,16 @@ mat-toolbar {
   width: 100%;
   border: none;
 }
+
+.disabled {
+  color: #ddd;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.disabled-search {
+  background-color: #ddd;
+  color: #ddd;
+  cursor: not-allowed;
+  pointer-events: none;
+}
