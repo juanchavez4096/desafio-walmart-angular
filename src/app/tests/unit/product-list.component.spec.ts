@@ -135,6 +135,11 @@ describe('ProductListComponent', () => {
     expect(componentService.extractData({})).toEqual({});
   });
 
+  it('should parse', () => {
+    expect(component.formatMoney(500000)).toEqual("500.000");
+    expect(component.formatMoney("test")).toEqual("test");
+  });
+
   
 
 
