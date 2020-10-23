@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ProductService } from '../core/service/product.service';
+import { ProductDto } from '../model/ProductDto';
 
 
 @Component({
@@ -8,50 +10,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
 
-  products = [];
+  products: ProductDto[] = [] as any;
   activeProduct = -1;
-  currentSearch: string;
-  pages: number = 4;
+  _currentSearch = '';
+  pages: number = 1;
   currentPage: number = 1;
-  
-  constructor() { }
 
-  ngOnInit(): void {
-    this.products = [{
-      "id": 1,
-      "brand": "ooy eqrceli",
-      "description": "rlñlw brhrka",
-      "image": "www.lider.cl/catalogo/images/whiteLineIcon.svg",
-      "price": 498724
-    },
-    {
-      "id": 2,
-      "brand": "dsaasd",
-      "description": "zlrwax bñyrh",
-      "image": "www.lider.cl/catalogo/images/babyIcon.svg",
-      "price": 130173
-    },
-    {
-      "id": 3,
-      "brand": "weñxoab",
-      "description": "hqhoy qacirk",
-      "image": "www.lider.cl/catalogo/images/homeIcon.svg",
-      "price": 171740
-    },
-    {
-      "id": 4,
-      "brand": "sjlzxeo",
-      "description": "pnyn rlxbewnk",
-      "image": "www.lider.cl/catalogo/images/computerIcon.svg",
-      "price": 890348
-    }];
+  @Input('currentSearch')
+  set currentSearch(currentSearch: string) {
+    this._currentSearch = currentSearch;
+    this.searchProducts(0, this._currentSearch);
   }
 
-  setElevation(i: number): void{
+  @Output() searchingEventEmiter = new EventEmitter<boolean>();
+
+  constructor(private productService: ProductService) { }
+
+  ngOnInit(): void {
+    this.searchProducts(0, "");
+  }
+
+  searchProducts(page: number, search: string) {
+    this.searchingEventEmiter.emit(true);
+    this.productService.getProducts(page, search).subscribe(product => {
+      this.products = product.content;
+      this.pages = product.totalPages === 0 ? 1 : product.totalPages;
+      this.currentPage = page + 1;
+      this.searchingEventEmiter.emit(false);
+    }, error => {
+      this.searchingEventEmiter.emit(false);
+    })
+  }
+
+  setElevation(i: number): void {
     this.activeProduct = i;
   }
 
-  changePage(newPage: number){
+  changePage(newPage: number) {
     if (newPage < 1) {
       newPage = 1;
     }
@@ -59,7 +54,7 @@ export class ProductListComponent implements OnInit {
       newPage = this.pages;
     }
     if (this.currentPage !== newPage) {
-      this.currentPage = newPage; 
+      this.searchProducts(newPage - 1, this._currentSearch);
     }
   }
 }
