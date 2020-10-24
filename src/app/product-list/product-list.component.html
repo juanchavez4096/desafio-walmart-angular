@@ -11,7 +11,7 @@
 
 
   <div fxLayout="row wrap" fxLayoutAlign="flex-start" fxLayoutGap="16px grid">
-    <div fxFlex="25%" [ngStyle.xs]="{'height': '100%'}" fxFlex.xs="100%" fxFlex.sm="33%" fxFlex.md="25%" fxFlex.lg="25%"
+    <div fxFlex="25%" [ngStyle.xs]="{'height': '100%'}" fxFlex.xs="50%" fxFlex.sm="33%" fxFlex.md="25%" fxFlex.lg="25%"
       *ngFor="let product of products; let i = index;">
       <mat-card class="product-list-card" [ngClass]="{
             'mat-elevation-z3': activeProduct === i
