@@ -1,88 +1,159 @@
-<div style="margin: 10px;">
-  <div fxLayout="row" fxLayoutAlign="space-between" class="featured">
-    <div>
-      <span *ngIf="_currentSearch">Resultados para <span class="bold">{{_currentSearch}}</span> : </span>
+<div style="height: 100vh;">
+
+
+
+  <div style="margin: 0 auto; max-width: 1440px;">
+    <div style="margin-right: 10px; margin-left: 10px;">
+
+
+      <div fxLayout="row" fxLayoutAlign="space-between" class="featured">
+        <div>
+          <span *ngIf="_currentSearch">Resultados para <span class="bold">{{_currentSearch}}</span> : </span>
+        </div>
+
+        <div>
+          <button mat-flat-button [matMenuTriggerFor]="menu" [disableRipple]="true" style="margin-right: 2px;"
+            class="mat-elevation-z1">Ordenar por: destacados
+            <img style="width: 5px;" alt="arrow" src="https://www.lider.cl/catalogo/images/arrow_mobile.svg">
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button class="menu-font" mat-menu-item>Destacados</button>
+            <button class="menu-font" mat-menu-item>Menor precio</button>
+            <button class="menu-font" mat-menu-item>Mayor precio</button>
+            <button class="menu-font" mat-menu-item>Menor descuento</button>
+            <button class="menu-font" mat-menu-item>Mayor descuento</button>
+          </mat-menu>
+        </div>
+
+      </div>
+
+      <div fxLayout fxLayout.xs="column" fxLayoutAlign="space-between" fxLayoutWrap="wrap">
+        <div fxFlex="25%" fxFlex.xs="0%"></div>
+        <div fxLayout fxLayout.xs="column" fxLayoutWrap="wrap" fxLayoutAlign="space-around" fxFlex="75%"
+          fxFlex.xs="100%">
+
+          <div>
+            <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="8px grid">
+              <div fxFlex="25%" [ngStyle.xs]="{'height': '100%'}" fxFlex.xs="50%" fxFlex.sm="50%" fxFlex.md="33%"
+                fxFlex.lg="25%" *ngFor="let product of products; let i = index;">
+                <mat-card class="product-list-card" [ngClass]="{
+                    'mat-elevation-z3': activeProduct === i
+                  }" (mouseover)="setElevation(i)" (mouseout)="setElevation(-1)">
+                  <img [src]="'https://'+product.image" style="margin-bottom: 10px;">
+                  <mat-card-content style="margin-bottom: 0px; max-width: 100%;">
+                    <p>
+                      <span class="bold">{{product.brand}}</span>
+                      <span class="description">{{product.description}}</span>
+                    </p>
+                    <div style="margin-bottom: 40px;">
+                      <mat-chip-list aria-label="discount" style="margin-bottom: 10px;">
+                        <span
+                          class="price">${{product.priceDiscount === 0 ? formatMoney(product.price) : formatMoney(product.priceDiscount)}}</span>
+                        <mat-chip *ngIf="product.discount !== 0" class="discountChip" [disableRipple]="true">
+                          {{product.discount}}%
+                        </mat-chip>
+                      </mat-chip-list>
+
+                      <div *ngIf="product.discount !== 0" class="originalPrice">${{formatMoney(product.price)}}</div>
+                    </div>
+
+
+                    <mat-chip-list aria-label="despacho retiro" class="despacho-retiro"
+                      style="width: 0px; height: 0px;">
+                      <mat-chip class="chip despacho-chip" [disableRipple]="true">
+                        <img style="width: 15px;" alt="arrow"
+                          src="https://www.lider.cl/catalogo/images/despacho-icon.svg">
+                        <span style="margin-left: 5px;">despacho</span>
+                      </mat-chip>
+                      <mat-chip class="chip retiro-chip" [disableRipple]="true">
+                        <img style="width: 15px;" alt="arrow"
+                          src="https://www.lider.cl/catalogo/images/delivery-icon.svg">
+                        <span style="margin-left: 5px;">retiro</span>
+
+                      </mat-chip>
+                    </mat-chip-list>
+
+                  </mat-card-content>
+                  <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+                    <button mat-flat-button [disableRipple]="true"
+                      class="mat-elevation-z2 wallmart-add-card-button">Agregar</button>
+                  </mat-card-actions>
+                </mat-card>
+              </div>
+            </div>
+
+            <mat-toolbar class="paginator" fxLayout="column" fxLayoutAlign="center">
+              <div fxLayoutGap="8px" fxLayout="row" fxLayoutAlign="center">
+                <span class="arrow" [ngClass]="{
+              'disabled': currentPage === 1
+            }" (click)="changePage(currentPage - 1)">
+                  < </span>
+                    <span class="page" [ngClass]="{
+              'selected-page': currentPage === 1,
+              'non-selected-page' : currentPage !== 1
+            }" (click)="changePage(1)">1</span>
+
+                    <span *ngIf="currentPage - 3 > 1">...</span>
+
+                    <span class="page non-selected-page" *ngIf="currentPage - 2 > 1"
+                      (click)="changePage(currentPage - 2)">
+                      {{currentPage - 2}}
+                    </span>
+
+                    <span class="page non-selected-page" *ngIf="currentPage - 1 > 1"
+                      (click)="changePage(currentPage - 1)">
+                      {{currentPage - 1}}
+                    </span>
+
+                    <span class="page selected-page" *ngIf="currentPage !== 1 && currentPage !== pages">
+                      {{currentPage}}
+                    </span>
+
+                    <span class="page non-selected-page" *ngIf="currentPage + 1 < pages"
+                      (click)="changePage(currentPage + 1)">
+                      {{currentPage + 1}}
+                    </span>
+
+                    <span class="page non-selected-page" *ngIf="currentPage + 2 < pages"
+                      (click)="changePage(currentPage + 2)">
+                      {{currentPage + 2}}
+                    </span>
+
+                    <span *ngIf="pages > 6 && currentPage + 3 < pages">...</span>
+
+                    <span class="page" *ngIf="pages != 1" [ngClass]="{
+              'selected-page': currentPage === pages,
+              'non-selected-page' : currentPage !== pages
+            }" (click)="changePage(pages)">{{pages}}</span>
+                    <span class="arrow" [ngClass]="{
+              'disabled': currentPage === pages
+            }" (click)="changePage(currentPage + 1)">></span>
+              </div>
+            </mat-toolbar>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <button fxLayout="column" fxLayoutAlign="center" mat-flat-button [disableRipple]="true"
+        class="button-footer mat-elevation-z1">
+        <span fxLayout="row" fxLayoutAlign="space-between">
+          <span>Ver información legal</span>
+          <img style="width: 20px;" alt="arrow" src="https://www.lider.cl/catalogo/images/arrow_blue.svg">
+        </span>
+
+      </button>
+
+
     </div>
-
-    <button mat-raised-button [disableRipple]="true" class="button-navbar">Ordenar por: destacados
-      <img style="width: 5px;" alt="arrow" src="https://www.lider.cl/catalogo/images/arrow_mobile.svg">
-    </button>
   </div>
-
-
-  <div fxLayout="row wrap" fxLayoutAlign="flex-start" fxLayoutGap="16px grid">
-    <div fxFlex="25%" [ngStyle.xs]="{'height': '100%'}" fxFlex.xs="50%" fxFlex.sm="33%" fxFlex.md="25%" fxFlex.lg="25%"
-      *ngFor="let product of products; let i = index;">
-      <mat-card class="product-list-card" [ngClass]="{
-            'mat-elevation-z3': activeProduct === i
-          }" (mouseover)="setElevation(i)" (mouseout)="setElevation(-1)">
-        <img mat-card-image [src]="'https://'+product.image">
-        <mat-card-content>
-          <p>
-            <span class="bold">{{product.brand}}</span>
-            <span class="description">{{product.description}}</span>
-          </p>
-          <mat-chip-list aria-label="Color selection" style="margin-bottom: 10px;">
-            <span class="price">${{product.priceDiscount === 0 ? formatMoney(product.price) : formatMoney(product.priceDiscount)}}</span>
-            <mat-chip *ngIf="product.discount !== 0" class="discountChip">
-              {{product.discount}}%
-            </mat-chip>
-          </mat-chip-list>
-
-          <div *ngIf="product.discount !== 0" class="originalPrice">${{formatMoney(product.price)}}</div>
-
-
-        </mat-card-content>
-        <mat-card-actions fxLayout="row" fxLayoutAlign="center">
-          <button mat-flat-button [disableRipple]="true"
-            class="mat-elevation-z1 wallmart-add-card-button">Agregar</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </div>
-
-  <mat-toolbar class="paginator" fxLayout="column" fxLayoutAlign="center">
+  <mat-toolbar class="footer" fxLayout="column" fxLayoutAlign="center">
     <div fxLayoutGap="8px" fxLayout="row" fxLayoutAlign="center">
-      <span class="arrow" [ngClass]="{
-      'disabled': currentPage === 1
-    }" (click)="changePage(currentPage - 1)">
-        < </span>
-          <span class="page" [ngClass]="{
-      'selected-page': currentPage === 1,
-      'non-selected-page' : currentPage !== 1
-    }" (click)="changePage(1)">1</span>
 
-          <span *ngIf="currentPage - 3 > 1">...</span>
-
-          <span class="page non-selected-page" *ngIf="currentPage - 2 > 1" (click)="changePage(currentPage - 2)">
-            {{currentPage - 2}}
-          </span>
-
-          <span class="page non-selected-page" *ngIf="currentPage - 1 > 1" (click)="changePage(currentPage - 1)">
-            {{currentPage - 1}}
-          </span>
-
-          <span class="page selected-page" *ngIf="currentPage !== 1 && currentPage !== pages">
-            {{currentPage}}
-          </span>
-
-          <span class="page non-selected-page" *ngIf="currentPage + 1 < pages" (click)="changePage(currentPage + 1)">
-            {{currentPage + 1}}
-          </span>
-
-          <span class="page non-selected-page" *ngIf="currentPage + 2 < pages" (click)="changePage(currentPage + 2)">
-            {{currentPage + 2}}
-          </span>
-
-          <span *ngIf="pages > 6 && currentPage + 3 < pages">...</span>
-
-          <span class="page" *ngIf="pages != 1" [ngClass]="{
-      'selected-page': currentPage === pages,
-      'non-selected-page' : currentPage !== pages
-    }" (click)="changePage(pages)">{{pages}}</span>
-          <span class="arrow" [ngClass]="{
-      'disabled': currentPage === pages
-    }" (click)="changePage(currentPage + 1)">></span>
     </div>
   </mat-toolbar>
+
 </div>
