@@ -33,13 +33,13 @@
         <div fxLayout fxLayout.xs="column" fxLayoutWrap="wrap" fxLayoutAlign="space-around" fxFlex="75%"
           fxFlex.xs="100%">
 
-          <div>
-            <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="8px grid">
-              <div fxFlex="25%" [ngStyle.xs]="{'height': '100%'}" fxFlex.xs="50%" fxFlex.sm="50%" fxFlex.md="33%"
-                fxFlex.lg="25%" *ngFor="let product of products; let i = index;">
+          <div style="max-width: 100%;">
+            <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="8px grid" >
+              <div fxFlex.xs="50%" *ngFor="let product of products; let i = index;">
                 <mat-card class="product-list-card" [ngClass]="{
                     'mat-elevation-z3': activeProduct === i
                   }" (mouseover)="setElevation(i)" (mouseout)="setElevation(-1)">
+                  
                   <img [src]="'https://'+product.image" style="margin-bottom: 10px;">
                   <mat-card-content style="margin-bottom: 0px; max-width: 100%;">
                     <p>
