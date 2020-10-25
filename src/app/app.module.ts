@@ -11,7 +11,9 @@ import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoreModule } from './core/core.module';
 import { FormsModule } from '@angular/forms';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatGridListModule } from '@angular/material/grid-list';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {MatChipsModule} from '@angular/material/chips';
     FlexLayoutModule,
     CoreModule,
     FormsModule,
-    MatChipsModule
+    MatChipsModule,
+    MatGridListModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

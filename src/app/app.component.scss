@@ -88,6 +88,9 @@ mat-toolbar {
   width: 100%;
   border: none;
 }
+.input-search:focus {
+  outline: none;
+}
 
 .disabled {
   color: #ddd;
